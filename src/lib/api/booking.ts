@@ -1,9 +1,10 @@
 import type { CreateBookingRequest } from '$lib/types/booking';
+import { PUBLIC_API_BASE_URL } from '$env/static/public';
 
 export const createBooking = async (bookingData: CreateBookingRequest) => {
 	// use fetch
 
-	const response = await fetch('https://calendar.meetchase.ai/api/meetings', {
+	const response = await fetch(`${PUBLIC_API_BASE_URL}/meetings`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'

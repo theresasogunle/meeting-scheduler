@@ -103,7 +103,8 @@
 			isLoading = false;
 			return;
 		}
-		await createBooking({
+		try{
+				await createBooking({
 			attendees,
 			start: startTime,
 			end: endTime
@@ -112,6 +113,12 @@
 		bookingStore.goToConfirmation();
 		// clear in url parameters
 		history.replaceState(null, '', window.location.pathname);
+		}catch(e){
+			isLoading = false;
+			// handle error
+			console.error('Error creating booking:', e);
+		}
+	
 	};
 </script>
 

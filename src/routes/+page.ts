@@ -2,8 +2,7 @@ import type { PageLoad } from './$types';
 import type { AvailabilitySlot } from '$lib/types/calendar';
 import { startOfMonth, endOfMonth, format, parse } from 'date-fns';
 import { getCurrentMonthString } from '$lib/utils/urlSync';
-
-const CALENDAR_API_URL = 'https://calendar.meetchase.ai';
+import { PUBLIC_API_BASE_URL } from '$env/static/public';
 
 export const load: PageLoad = async ({ fetch, url }) => {
 	// Get month from URL params, default to current month
@@ -24,27 +23,22 @@ export const load: PageLoad = async ({ fetch, url }) => {
 	params.append('start', format(startDate, 'yyyy-MM-dd'));
 	params.append('end', format(endDate, 'yyyy-MM-dd'));
 
-	const apiUrl = new URL('/api/availability', CALENDAR_API_URL);
-	try {
-		// Add timeout to prevent hanging in serverless environment
-		const controller = new AbortController();
-		const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 second timeout
+	const fullUrl = `${PUBLIC_API_BASE_URL}/availability?${params}`;
 
-		const response = await fetch(`${apiUrl}?${params}`, {
-			signal: controller.signal,
+	try {
+		const response = await fetch(fullUrl, {
 			headers: {
 				Accept: 'application/json'
 			}
 		});
 
-		clearTimeout(timeoutId);
-
 		if (!response.ok) {
-			console.error('Failed to fetch availability:', response.status, response.statusText);
 			return { availability: [] };
 		}
 
-		const availability: AvailabilitySlot[] = await response.json();
+		const data = await response.json();
+
+		const availability: AvailabilitySlot[] = data;
 		return { availability };
 	} catch (error) {
 		console.error('Error loading availability:', error);
