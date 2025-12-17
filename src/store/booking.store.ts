@@ -37,7 +37,6 @@ function getInitialState(): BookingState {
     currentMonth: currentMonth || new Date(),
     selectedTimeSlot,
     bookingDetails: initialBookingDetails,
-    isComplete: false,
     availability: [],
     isLoadingAvailability: false
   };
@@ -46,16 +45,12 @@ function getInitialState(): BookingState {
 const initialState: BookingState = getInitialState();
 
 function createBookingStore() {
-  const { subscribe, set, update } = writable<BookingState>(initialState);
+  const { subscribe, update } = writable<BookingState>(initialState);
 
   return {
     subscribe,
 
     // Navigate between steps
-    setStep: (step: BookingStep) => {
-      update(state => ({ ...state, currentStep: step }));
-    },
-
     goToDetails: () => {
       update(state => ({ ...state, currentStep: BookingStep.Details }));
     },
@@ -65,7 +60,6 @@ function createBookingStore() {
     },
 
     goToConfirmation: () => {
-     
       update(state => ({
         ...state,
         currentStep: BookingStep.Confirmation,
@@ -123,33 +117,6 @@ function createBookingStore() {
       }));
     },
 
-    addGuest: (guest: string) => {
-      update(state => ({
-        ...state,
-        bookingDetails: {
-          ...state.bookingDetails,
-          guests: [...state.bookingDetails.guests, guest]
-        }
-      }));
-    },
-
-    removeGuest: (index: number) => {
-      update(state => ({
-        ...state,
-        bookingDetails: {
-          ...state.bookingDetails,
-          guests: state.bookingDetails.guests.filter((_, i) => i !== index)
-        }
-      }));
-    },
-
-    setBookingDetails: (details: Partial<BookingDetails>) => {
-      update(state => ({
-        ...state,
-        bookingDetails: { ...state.bookingDetails, ...details }
-      }));
-    },
-
     // Set availability
     setAvailability: (availability: AvailabilitySlot[]) => {
       update(state => ({
@@ -164,21 +131,6 @@ function createBookingStore() {
       update(state => ({
         ...state,
         isLoadingAvailability: isLoading
-      }));
-    },
-
-    // Reset store
-    reset: () => {
-      set(initialState);
-      updateURLParams({ month: getCurrentMonthString(), timeSlot: undefined });
-    },
-
-    // Complete booking
-    completeBooking: () => {
-      update(state => ({
-        ...state,
-        currentStep: BookingStep.Confirmation,
-        isComplete: true
       }));
     }
   };
@@ -202,46 +154,9 @@ export const selectedTimeSlot = derived(
   $bookingStore => $bookingStore.selectedTimeSlot
 );
 
-// Derived stores for date and time from timeSlot
-export const selectedDate = derived(
-  bookingStore,
-  $bookingStore => $bookingStore.selectedTimeSlot
-);
-
-export const selectedTime = derived(
-  bookingStore,
-  $bookingStore => $bookingStore.selectedTimeSlot
-);
-
 export const bookingDetails = derived(
   bookingStore,
   $bookingStore => $bookingStore.bookingDetails
-);
-
-export const isBookingComplete = derived(
-  bookingStore,
-  $bookingStore => $bookingStore.isComplete
-);
-
-// Derived store to check if timeSlot selection is complete
-export const isDateTimeSelected = derived(
-  bookingStore,
-  $bookingStore => $bookingStore.selectedTimeSlot !== null
-);
-
-// Derived store to check if booking details are valid
-export const isDetailsValid = derived(
-  bookingStore,
-  $bookingStore => {
-    const { name, email } = $bookingStore.bookingDetails;
-    return name.trim() !== '' && email.trim() !== '' && email.includes('@');
-  }
-);
-
-// Derived store for full scheduled datetime (just returns the timeSlot)
-export const scheduledDateTime = derived(
-  bookingStore,
-  $bookingStore => $bookingStore.selectedTimeSlot
 );
 
 // Derived store for availability

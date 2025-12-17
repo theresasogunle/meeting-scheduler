@@ -20,7 +20,6 @@ export interface BookingState {
   currentMonth: Date; // Tracks the current month being viewed
   selectedTimeSlot: Date | null; // Combined date + time
   bookingDetails: BookingDetails;
-  isComplete: boolean;
   availability: AvailabilitySlot[];
   isLoadingAvailability: boolean;
 }

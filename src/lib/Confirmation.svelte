@@ -3,22 +3,15 @@
 	import { format } from 'date-fns';
 
 	import Avatar from './components/Avatar.svelte';
+	import { EVENT_METADATA } from './utils';
 	import { bookingDetails, bookingStore } from '../store/booking.store';
-
-	const EVENT = {
-		title: 'Discovery Call',
-		duration: 30,
-		timezone: 'Europe/London',
-		platform: 'Google Meet',
-		organizationName: 'Acme Organization'
-	};
 
 	let scheduledDate = $derived($bookingStore.selectedTimeSlot || new Date());
 
 	const formattedDate = $derived(format(scheduledDate, 'EEEE, MMMM d, yyyy'));
 	const formattedTime = $derived(format(scheduledDate, 'h:mm a'));
 	const endTime = $derived(
-		format(new Date(scheduledDate.getTime() + EVENT.duration * 60000), 'h:mm a')
+		format(new Date(scheduledDate.getTime() + EVENT_METADATA.durationMinutes * 60000), 'h:mm a')
 	);
 </script>
 
@@ -37,10 +30,14 @@
 
 	<div class="space-y-6 rounded-sm border border-neutral-800 bg-neutral-900 px-6 py-6 shadow-lg">
 		<div class="flex items-start gap-4">
-			<Avatar size={48} alt="{EVENT.organizationName} Logo" name={EVENT.organizationName} />
+			<Avatar
+				size={48}
+				alt="{EVENT_METADATA.organizationName} Logo"
+				name={EVENT_METADATA.organizationName}
+			/>
 			<div class="flex-1 space-y-1">
-				<p class="text-sm text-neutral-400">{EVENT.organizationName}</p>
-				<h2 class="text-base font-semibold text-neutral-100">{EVENT.title}</h2>
+				<p class="text-sm text-neutral-400">{EVENT_METADATA.organizationName}</p>
+				<h2 class="text-base font-semibold text-neutral-100">{EVENT_METADATA.title}</h2>
 			</div>
 		</div>
 
@@ -60,21 +57,21 @@
 			<div class="flex items-start gap-3">
 				<Clock size={16} class="text-neutral-400" />
 				<div class="flex-1">
-					<p class="text-sm text-neutral-200">{EVENT.duration} minutes</p>
+					<p class="text-sm text-neutral-200">{EVENT_METADATA.durationMinutes} minutes</p>
 				</div>
 			</div>
 
 			<div class="flex items-start gap-3">
 				<Globe size={16} class="text-neutral-400" />
 				<div class="flex-1">
-					<p class="text-sm text-neutral-200">{EVENT.timezone}</p>
+					<p class="text-sm text-neutral-200">{EVENT_METADATA.timezone}</p>
 				</div>
 			</div>
 
 			<div class="flex items-start gap-3">
 				<Video size={16} class="text-neutral-400" />
 				<div class="flex-1">
-					<p class="text-sm text-neutral-200">{EVENT.platform}</p>
+					<p class="text-sm text-neutral-200">{EVENT_METADATA.platform}</p>
 					<p class="text-xs text-neutral-500">A meeting link will be sent via email</p>
 				</div>
 			</div>
