@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Component } from 'svelte';
-	import { Flip } from 'gsap/Flip';
 	import gsap from 'gsap';
+	import { Flip } from 'gsap/all';
 	import BookingDateTime from './BookingDateTime.svelte';
 	import BookingDetails from './BookingDetails.svelte';
 	import BookingMeta from './BookingMeta.svelte';
