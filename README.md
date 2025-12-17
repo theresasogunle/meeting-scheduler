@@ -30,8 +30,6 @@ A modern, intuitive meeting booking interface built for SDR platforms to help pr
 
 ## Initial Ideas in tldraw.
 
-## Feature Prioritization & Visualization
-
 I visualized and prioritized features based on user value(putting myself in the shoes of the users) and implementation effort. This helped clarify the core booking flow and identify enhancements for future iterations.
 
 ![Finding a time](<shapes at 25-12-17 12.16.39.png>)
