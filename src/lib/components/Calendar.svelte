@@ -123,7 +123,7 @@
 	});
 
 	// Handle date selection
-	const selectDate = (day: any) => {
+	const selectDate = (day: { date: Date; isCurrentMonth: boolean }) => {
 		if (isDateDisabled(day.date) || !day.isCurrentMonth) return;
 
 		selectedDate = day.date;

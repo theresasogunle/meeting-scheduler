@@ -38,7 +38,7 @@
 		<span class="inline-block text-sm font-medium text-neutral-200">Guests</span>
 	{/if}
 
-	{#each guests as _, index (index)}
+	{#each guests as guest, index (index)}
 		<div class="flex flex-col gap-2">
 			<div class="flex gap-1.5">
 				<Input type="email" bind:value={guests[index]} placeholder="Guest email" />
