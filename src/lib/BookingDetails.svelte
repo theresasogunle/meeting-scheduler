@@ -115,7 +115,7 @@
 	};
 </script>
 
-<form class="w-full space-y-6 px-4 py-6" onsubmit={handleSubmit}>
+<form class="w-full md:w-auto space-y-6 px-4 py-6" onsubmit={handleSubmit}>
 	<Input
 		label="Name"
 		required

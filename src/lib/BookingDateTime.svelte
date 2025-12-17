@@ -44,29 +44,31 @@
 	});
 </script>
 
-<div class="flex w-full flex-col md:w-120 md:flex-row">
-	<div class="px-4 py-6">
-		<Calendar
+<div class="flex flex-col md:flex-row">
+	<div class="md:w-120">
+		<div class="px-4 py-6">
+			<Calendar
+				selectedDate={selectedDateForTimeSlots}
+				currentMonth={$currentMonth}
+				loading={$isLoadingAvailability}
+				onDateSelect={(date: Date) => {
+					selectedDateForTimeSlots = date;
+				}}
+				onMonthChange={(month: Date) => {
+					bookingStore.setMonth(month);
+				}}
+				{highlightedDates}
+			/>
+		</div>
+	</div>
+
+	<div class="w-full border-t border-neutral-800 md:w-60 md:border-t-0 md:border-l">
+		<BookingTime
 			selectedDate={selectedDateForTimeSlots}
-			currentMonth={$currentMonth}
-			loading={$isLoadingAvailability}
-			onDateSelect={(date: Date) => {
-				selectedDateForTimeSlots = date;
+			onTimeSelect={(timeSlot: Date) => {
+				bookingStore.setTimeSlot(timeSlot);
+				bookingStore.goToDetails();
 			}}
-			onMonthChange={(month: Date) => {
-				bookingStore.setMonth(month);
-			}}
-			{highlightedDates}
 		/>
 	</div>
-</div>
-
-<div class="w-full border-t border-neutral-800 md:w-60 md:border-t-0 md:border-l">
-	<BookingTime
-		selectedDate={selectedDateForTimeSlots}
-		onTimeSelect={(timeSlot: Date) => {
-			bookingStore.setTimeSlot(timeSlot);
-			bookingStore.goToDetails();
-		}}
-	/>
 </div>
