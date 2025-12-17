@@ -4,7 +4,7 @@ A modern, intuitive meeting booking interface built for SDR platforms to help pr
 
 ## Live Demo
 
-[View Demo](#)
+[View Demo](https://meeting-scheduler-sepia.vercel.app/)
 
 ## Features
 
