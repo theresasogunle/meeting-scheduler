@@ -6,12 +6,11 @@
 	import Confirmation from './Confirmation.svelte';
 	import { currentStep } from '../store/booking.store';
 	import { BookingStep } from './types/booking';
-	import gsap from 'gsap';
+	import { gsap } from 'gsap/dist/gsap';
+
 	import { Flip } from 'gsap/dist/Flip';
 
-
 	gsap.registerPlugin(Flip);
-
 
 	const viewMap: Record<string, Component> = {
 		dateTime: BookingDateTime,
