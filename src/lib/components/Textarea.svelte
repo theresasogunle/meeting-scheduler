@@ -35,7 +35,7 @@
 	<textarea
 		{...restProps}
 		id={textareaId}
-		bind:value={value}
+		bind:value
 		aria-required={required}
 		aria-invalid={hasError}
 		aria-describedby={error ? `${textareaId}-error` : undefined}

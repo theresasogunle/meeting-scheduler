@@ -30,7 +30,9 @@
 		lg: 'p-3 text-base'
 	};
 
-	const buttonClasses = $derived(`flex font-medium rounded-sm cursor-pointer items-center gap-2 transition-colors ${variantClasses[variant]} ${sizeClasses[size]} ${className}`)
+	const buttonClasses = $derived(
+		`flex font-medium rounded-sm cursor-pointer items-center gap-2 transition-colors ${variantClasses[variant]} ${sizeClasses[size]} ${className}`
+	);
 </script>
 
 <button class={buttonClasses} {...restProps}>

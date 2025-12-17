@@ -152,7 +152,7 @@
 	<h2 class="text-base font-semibold text-neutral-400">
 		{monthYearDisplay}
 	</h2>
-	<div >
+	<div>
 		<button
 			type="button"
 			onclick={goToPrevMonth}
@@ -179,7 +179,7 @@
 <div class="grid grid-cols-7 gap-1">
 	<!-- Day headers -->
 	{#each DAYS_OF_WEEK as day (day)}
-		<div class="p-2 text-center uppercase text-xs font-medium text-neutral-300">
+		<div class="p-2 text-center text-xs font-medium text-neutral-300 uppercase">
 			{day}
 		</div>
 	{/each}
@@ -190,11 +190,10 @@
 		{@const highlighted = isDateInList(day.date, highlightedDates)}
 		{@const selected = isSelected(day.date)}
 		{@const today = isToday(day.date)}
-		
 
 		{#if loading}
 			<!-- Skeleton loader for dates -->
-			<div class="relative aspect-square rounded-lg p-1 animate-pulse">
+			<div class="relative aspect-square animate-pulse rounded-lg p-1">
 				<div class="h-full w-full rounded-lg bg-neutral-800/50"></div>
 			</div>
 		{:else}
@@ -212,19 +211,15 @@
 					day.isCurrentMonth ? 'text-neutral-300' : 'text-neutral-500',
 					// Disabled styles
 					disabled && day.isCurrentMonth ? 'text-neutral-300' : '',
-				
+
 					// Selected state
 					selected && !disabled ? 'bg-neutral-200 text-neutral-900' : '',
 
+					// Hover styles (only for non-disabled, current month dates)
+					!disabled && day.isCurrentMonth ? 'hover:bg-neutral-50 hover:text-neutral-900' : '',
 
-						// Hover styles (only for non-disabled, current month dates)
-					!disabled && day.isCurrentMonth
-						? 'hover:bg-neutral-50 hover:text-neutral-900'
-						: '',
-					
 					// Highlighted state (only if not selected)
 					highlighted && !selected && !disabled ? 'bg-neutral-800 text-neutral-200' : ''
-					
 				]}
 				aria-label={format(day.date, 'MMMM d, yyyy')}
 				aria-pressed={selected}

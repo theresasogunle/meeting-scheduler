@@ -3,15 +3,14 @@
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
 
-
 :root {
-  @apply bg-background text-neutral-300 font-sans;
+	@apply bg-background font-sans text-neutral-300;
 }
 
 @theme {
-  --font-sans: "Geist", "sans-serif";
-  --color-background: oklch(0.1684 0 0);
-  --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
-  --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
-  --color-primary: oklch(0.6922 0.1976 23.83)
+	--font-sans: 'Geist', 'sans-serif';
+	--color-background: oklch(0.1684 0 0);
+	--ease-fluid: cubic-bezier(0.3, 0, 0, 1);
+	--ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+	--color-primary: oklch(0.6922 0.1976 23.83);
 }

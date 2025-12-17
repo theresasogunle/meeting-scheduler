@@ -5,7 +5,7 @@
 
 	import Avatar from './components/Avatar.svelte';
 	import { format } from 'date-fns';
-	import {  bookingStore, currentStep } from '../store/booking.store';
+	import { bookingStore, currentStep } from '../store/booking.store';
 	import { BookingStep } from './types/booking';
 
 	onMount(() => {

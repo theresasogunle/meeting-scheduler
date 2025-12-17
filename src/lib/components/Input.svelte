@@ -5,7 +5,7 @@
 		label?: string;
 		error?: string;
 		required?: boolean;
-    value?: string;
+		value?: string;
 	}
 
 	let {
@@ -13,7 +13,7 @@
 		error,
 		required = false,
 		class: className = '',
-    value= $bindable<string>(''),
+		value = $bindable<string>(''),
 		id,
 		...restProps
 	}: Props = $props();
@@ -35,7 +35,7 @@
 	<input
 		{...restProps}
 		id={inputId}
-    bind:value={value}
+		bind:value
 		aria-required={required}
 		aria-invalid={hasError}
 		aria-describedby={error ? `${inputId}-error` : undefined}

@@ -1,14 +1,16 @@
 <script lang="ts">
 	import type { Component } from 'svelte';
-	import gsap from 'gsap';
-	import { Flip } from 'gsap/all';
 	import BookingDateTime from './BookingDateTime.svelte';
 	import BookingDetails from './BookingDetails.svelte';
 	import BookingMeta from './BookingMeta.svelte';
 	import Confirmation from './Confirmation.svelte';
 	import { currentStep } from '../store/booking.store';
 	import { BookingStep } from './types/booking';
+	import { gsap } from 'gsap';
+	import { Flip } from 'gsap/dist/Flip';
 
+
+	gsap.registerPlugin(Flip);
 	// Register GSAP plugins
 	gsap.registerPlugin(Flip);
 

@@ -1,5 +1,11 @@
 <script lang="ts">
-	import { bookingStore, selectedTimeSlot, availability, currentMonth, isLoadingAvailability } from '../store/booking.store';
+	import {
+		bookingStore,
+		selectedTimeSlot,
+		availability,
+		currentMonth,
+		isLoadingAvailability
+	} from '../store/booking.store';
 	import BookingTime from './BookingTime.svelte';
 	import Calendar from './components/Calendar.svelte';
 	import { startOfDay } from 'date-fns';
@@ -13,20 +19,25 @@
 			const today = startOfDay(new Date());
 
 			// Get all unique dates from availability
-			const dates = $availability.map(slot => startOfDay(new Date(slot.start)));
+			const dates = $availability.map((slot) => startOfDay(new Date(slot.start)));
 
 			// Filter out dates that are before today
-			const validDates = dates.filter(date => date >= today);
+			const validDates = dates.filter((date) => date >= today);
 
 			// Get the earliest valid date
-			const earliestDate = validDates.length > 0
-				? validDates.reduce((earliest, current) => current < earliest ? current : earliest)
-				: null;
+			const earliestDate =
+				validDates.length > 0
+					? validDates.reduce((earliest, current) => (current < earliest ? current : earliest))
+					: null;
 
 			// Only auto-select if:
 			// 1. We found a valid date
 			// 2. No date is currently selected OR selected date is not in current valid dates
-			if (earliestDate && (!selectedDateForTimeSlots || !validDates.some(d => d.getTime() === startOfDay(selectedDateForTimeSlots!).getTime()))) {
+			if (
+				earliestDate &&
+				(!selectedDateForTimeSlots ||
+					!validDates.some((d) => d.getTime() === startOfDay(selectedDateForTimeSlots!).getTime()))
+			) {
 				selectedDateForTimeSlots = earliestDate;
 			}
 		}

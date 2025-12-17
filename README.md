@@ -4,7 +4,7 @@ A modern, intuitive meeting booking interface built for SDR platforms to help pr
 
 ## Live Demo
 
-[View Demo](#) 
+[View Demo](#)
 
 ## Features
 
@@ -28,8 +28,8 @@ A modern, intuitive meeting booking interface built for SDR platforms to help pr
 - **GSAP** - Animation library for smooth transitions
 - **Lucide Svelte** - Icon library
 
-
 ## Assumptions
+
 - I have assumed everyone is on Europe/London timezone
 - I have assumed that users prefer the 12hr time format
 - I have assumed that the booking will always be successful, meaning there wouldn't be an error from the API when calling the POST meeting endpoint.
@@ -52,8 +52,7 @@ A modern, intuitive meeting booking interface built for SDR platforms to help pr
 
 **Decision**: Month navigation arrows (← →) are placed close together, directly adjacent to each other.
 
-**Reasoning**: This creates a "navigation cluster" that minimizes mouse movement. When users want to browse multiple months, they don't need to move their cursor across the screen,  both controls are within a small area. This follows Fitts's Law: reducing target distance increases interaction speed and reduces cognitive load. The close proximity signals these controls work together as a cohesive navigation unit.
-
+**Reasoning**: This creates a "navigation cluster" that minimizes mouse movement. When users want to browse multiple months, they don't need to move their cursor across the screen, both controls are within a small area. This follows Fitts's Law: reducing target distance increases interaction speed and reduces cognitive load. The close proximity signals these controls work together as a cohesive navigation unit.
 
 ### 4. 'Back Button' at the Bottom of the Form
 
@@ -164,12 +163,10 @@ npm run format
 8. **Unit tests** - Component and utility function tests
 9. **E2E tests** - Playwright tests for critical user flows
 
-
 ## Browser Support
 
 - Chrome/Edge (latest)
 - Firefox (latest)
 - Safari (latest)
-
 
 **Built with attention to detail and user experience** ✨

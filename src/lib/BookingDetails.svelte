@@ -91,22 +91,22 @@
 		});
 		// get selected time slot and fetch its start and end dates from availability
 		let startTime = $bookingStore.selectedTimeSlot?.toISOString();
-		if(!startTime) {
+		if (!startTime) {
 			// handle error
 			isLoading = false;
 			return;
 		}
 		// end time will be startTime + 30 minutes
 		let endTime = new Date(new Date(startTime).getTime() + 30 * 60000).toISOString();
-		if( !endTime) {
+		if (!endTime) {
 			// handle error
 			isLoading = false;
 			return;
 		}
 		await createBooking({
 			attendees,
-			start:startTime,
-			end:endTime
+			start: startTime,
+			end: endTime
 		});
 		isLoading = false;
 		bookingStore.goToConfirmation();
