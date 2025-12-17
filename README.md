@@ -90,11 +90,12 @@ To meet the 2hr mark, I have made the following assumption
 ## What I'd Improve With More Time
 
 1. **Timezone handling** - I have assumed everyone is in the same timezone, so this will be the highest priority to add a dropdown to select timezone.
-2. **Email validation & Name support for guests** - Currently guests accept any string; should validate email format, and also think of a way to add support for guest name without making the UI feel clustered.
-3. **Animations polishing** - Fine-tune hover state/button animations and easings(I didnt have much time to perfect them).
-4. **Mobile optimization** - While responsive, the calendar could use mobile-specific gestures (swipe to change months)
-5. **UI Polish** - There are some minor UI bugs, like the scrollbar on Firefox for the time listing sections.
-5. **Accessibility improvements**:
+2. **Server-side API handling** - Refactor to use SvelteKit form actions (`+page.server.ts`) for POST requests instead of client-side fetch. This provides better security, server-side validation, and eliminates CORS issues. The booking POST request should be proxied through SvelteKit's server routes.
+3. **Email validation & Name support for guests** - Currently guests accept any string; should validate email format, and also think of a way to add support for guest name without making the UI feel clustered.
+4. **Animations polishing** - Fine-tune hover state/button animations and easings(I didnt have much time to perfect them).
+5. **Mobile optimization** - While responsive, the calendar could use mobile-specific gestures (swipe to change months)
+6. **UI Polish** - There are some minor UI bugs, like the scrollbar on Firefox for the time listing sections.
+7. **Accessibility improvements**:
    - Keyboard navigation for calendar (arrow keys to navigate dates)
    - ARIA live regions for loading states
    - Focus management between steps
