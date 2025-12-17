@@ -28,6 +28,12 @@ A modern, intuitive meeting booking interface built for SDR platforms to help pr
 - **GSAP** - Animation library for smooth transitions
 - **Lucide Svelte** - Icon library
 
+## Initial Ideas in tldraw.
+![Finding a time](<shapes at 25-12-17 12.16.39.png>)
+![Booking a time](<shapes at 25-12-17 12.19.35.png>)
+![Confirmation](<shapes at 25-12-17 12.20.27.png>)
+
+
 ## Assumptions
 
 - I have assumed everyone is on Europe/London timezone
@@ -151,7 +157,7 @@ npm run format
 
 1. **Timezone handling** - I have assumed everyone is in the same timezone, so this will be the highest priority to add a dropdown to select timezone.
 2. **Email validation & Name support for guests** - Currently guests accept any string; should validate email format, and also think of a way to add support for guest name without making the UI feel clustered.
-3. **Animations polishing** - Fine-tune hover state animations and some transitions in the calendar view.
+3. **Animations polishing** - Fine-tune hover state/button animations and some transitions in the calendar view.
 4. **Mobile optimization** - While responsive, the calendar could use mobile-specific gestures (swipe to change months)
 5. **Accessibility improvements**:
    - Keyboard navigation for calendar (arrow keys to navigate dates)

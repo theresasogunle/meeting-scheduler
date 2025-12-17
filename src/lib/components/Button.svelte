@@ -31,7 +31,7 @@
 	};
 
 	const buttonClasses = $derived(
-		`flex font-medium rounded-sm cursor-pointer items-center gap-2 transition-colors ${variantClasses[variant]} ${sizeClasses[size]} ${className}`
+		`flex font-medium rounded-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed items-center gap-2 transition-colors ${variantClasses[variant]} ${sizeClasses[size]} ${className}`
 	);
 </script>
 

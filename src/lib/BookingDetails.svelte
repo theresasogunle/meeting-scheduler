@@ -143,8 +143,15 @@
 	<Guests />
 
 	<p class="text-sm text-neutral-400">
-		By proceeding, you agree to our <span class="text-neutral-300">Terms of Service</span> and
-		<span class="text-neutral-300">Privacy Policy</span>.
+		By proceeding, you agree to our <a
+			target="_blank"
+			href="https://www.meetchase.ai/terms-of-service"
+			class="text-neutral-300">Terms of Service</a
+		>
+		and
+		<a target="_blank" href="https://www.meetchase.ai/privacy-policy" class="text-neutral-300"
+			>Privacy Policy</a
+		>.
 	</p>
 	<div class="flex justify-end gap-6">
 		<Button
