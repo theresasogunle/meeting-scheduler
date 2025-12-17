@@ -50,10 +50,10 @@
 
 <div
 	bind:this={containerRef}
-	class="flex h-auto min-h-128 divide-x divide-neutral-800 overflow-hidden rounded-sm border border-neutral-800 bg-neutral-900"
+	class="flex h-auto min-h-128 flex-col divide-y divide-neutral-800 overflow-hidden rounded-sm border border-neutral-800 bg-neutral-900 md:flex-row md:divide-x md:divide-y-0"
 >
 	{#if $currentStep !== BookingStep.Confirmation}
-		<div class="w-60">
+		<div class="w-full md:w-60">
 			<BookingMeta />
 		</div>
 	{/if}

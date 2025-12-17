@@ -30,8 +30,8 @@
 	const formattedTime = $derived(format(scheduledDate, 'h:mm a'));
 </script>
 
-<div class="space-y-6.5 px-4 py-6">
-	<div class="animate-item flex flex-col gap-4">
+<div class="space-y-6.5 px-4 py-6 md:space-y-6.5">
+	<div class="animate-item flex flex-col gap-4 md:flex-col">
 		<Avatar size={32} alt="Acme Org Logo" name="Acme Organization" />
 		<span class="text-sm font-semibold tracking-tight text-neutral-400">Acme Organization</span>
 	</div>
@@ -44,7 +44,7 @@
 		</p>
 	</div>
 
-	<div class="animate-item space-y-4 text-neutral-300">
+	<div class="animate-item space-y-4 text-neutral-300 md:space-y-4">
 		{#if $currentStep === BookingStep.Details}
 			<div class="flex items-start gap-2">
 				<div>

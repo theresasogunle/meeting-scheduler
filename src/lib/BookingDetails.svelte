@@ -115,7 +115,7 @@
 	};
 </script>
 
-<form class="space-y-6 px-4 py-6" onsubmit={handleSubmit}>
+<form class="w-full space-y-6 px-4 py-6" onsubmit={handleSubmit}>
 	<Input
 		label="Name"
 		required
@@ -153,7 +153,7 @@
 			>Privacy Policy</a
 		>.
 	</p>
-	<div class="flex justify-end gap-6">
+	<div class="flex flex-col justify-end gap-3 sm:flex-row sm:gap-6">
 		<Button
 			variant="ghost"
 			onclick={() => {

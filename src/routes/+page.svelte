@@ -19,6 +19,6 @@
 	});
 </script>
 
-<main class="flex min-h-screen items-center justify-center">
+<main class="flex min-h-screen items-center justify-center p-4">
 	<Booking />
 </main>

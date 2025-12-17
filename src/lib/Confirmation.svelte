@@ -15,7 +15,7 @@
 	);
 </script>
 
-<div class="w-140 space-y-8 px-4 py-8">
+<div class="w-full space-y-8 px-4 py-8 md:w-140">
 	<div class="flex flex-col items-center space-y-4 text-center">
 		<div class="flex size-16 items-center justify-center rounded-full bg-green-500/10">
 			<CircleCheck size={32} class="text-green-500" />

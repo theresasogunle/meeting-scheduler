@@ -149,7 +149,7 @@
 
 <!-- Header with month/year and navigation -->
 <div class="flex items-center justify-between pb-4">
-	<h2 class="text-base font-semibold text-neutral-400">
+	<h2 class="text-sm font-semibold text-neutral-400 sm:text-base">
 		{monthYearDisplay}
 	</h2>
 	<div>
@@ -179,7 +179,7 @@
 <div class="grid grid-cols-7 gap-1">
 	<!-- Day headers -->
 	{#each DAYS_OF_WEEK as day (day)}
-		<div class="p-2 text-center text-xs font-medium text-neutral-300 uppercase">
+		<div class="p-1 text-center text-xs font-medium text-neutral-300 uppercase sm:p-2">
 			{day}
 		</div>
 	{/each}

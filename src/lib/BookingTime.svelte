@@ -95,7 +95,7 @@
 	</div>
 
 	<div
-		class="grid max-h-100 grid-cols-[repeat(auto-fill,minmax(120px,1fr))] gap-3 overflow-y-auto p-2"
+		class="grid max-h-60 grid-cols-2 gap-3 overflow-y-auto p-2 sm:max-h-100 sm:grid-cols-[repeat(auto-fill,minmax(120px,1fr))]"
 	>
 		{#if !selectedDate}
 			<div class="col-span-full py-8 text-center text-neutral-500">

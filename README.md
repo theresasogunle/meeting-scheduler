@@ -29,10 +29,10 @@ A modern, intuitive meeting booking interface built for SDR platforms to help pr
 - **Lucide Svelte** - Icon library
 
 ## Initial Ideas in tldraw.
+
 ![Finding a time](<shapes at 25-12-17 12.16.39.png>)
 ![Booking a time](<shapes at 25-12-17 12.19.35.png>)
 ![Confirmation](<shapes at 25-12-17 12.20.27.png>)
-
 
 ## Assumptions
 
