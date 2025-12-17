@@ -5,7 +5,6 @@
 		label?: string;
 		error?: string;
 		required?: boolean;
-		helperText?: string;
     value?: string;
 	}
 
@@ -13,14 +12,13 @@
 		label,
 		error,
 		required = false,
-		helperText,
 		class: className = '',
     value= $bindable<string>(''),
 		id,
 		...restProps
 	}: Props = $props();
 
-	const inputId = id || `input-${Math.random().toString(36).slice(2, 11)}`;
+	const inputId = $derived(id || `input-${Math.random().toString(36).slice(2, 11)}`);
 	const hasError = $derived(!!error);
 </script>
 
@@ -40,19 +38,15 @@
     bind:value={value}
 		aria-required={required}
 		aria-invalid={hasError}
-		aria-describedby={error ? `${inputId}-error` : helperText ? `${inputId}-helper` : undefined}
+		aria-describedby={error ? `${inputId}-error` : undefined}
 		class="flex h-9 w-full rounded-sm border bg-neutral-950/50 px-3 py-2 text-sm shadow-sm transition-all file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:ring-1 focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 {hasError
-			? 'border-red-500 focus-visible:ring-red-500'
+			? 'border-red-800 focus-visible:ring-red-800'
 			: 'border-neutral-800 focus-visible:ring-neutral-400'} {className}"
 	/>
 
 	{#if error}
-		<p id="{inputId}-error" class="text-sm text-red-500" role="alert">
+		<p id="{inputId}-error" class="text-sm text-red-800" role="alert">
 			{error}
-		</p>
-	{:else if helperText}
-		<p id="{inputId}-helper" class="text-sm text-neutral-400">
-			{helperText}
 		</p>
 	{/if}
 </div>

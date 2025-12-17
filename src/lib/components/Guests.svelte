@@ -2,9 +2,16 @@
 	import { UserRoundPlus, X } from '@lucide/svelte';
 	import Button from './Button.svelte';
 	import Input from './Input.svelte';
+	import { bookingStore } from '../../store/booking.store';
 
-	let guests = $state<string[]>([]);
-	let showInitialButton = $state(true);
+	// Initialize from store
+	let guests = $state<string[]>($bookingStore.bookingDetails.guests || []);
+	let showInitialButton = $state(guests.length === 0);
+
+	// Sync with store whenever guests change
+	$effect(() => {
+		bookingStore.setGuests(guests);
+	});
 
 	function addGuest() {
 		guests.push('');

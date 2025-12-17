@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { DAYS_OF_WEEK } from '$lib/utils/constants';
 	import { ChevronLeft, ChevronRight } from '@lucide/svelte';
 	import {
 		startOfMonth,
@@ -25,7 +26,10 @@
 	 * @property {Date[]} [disabledDates] - Array of dates to disable
 	 * @property {Date[]} [availableDates] - Array of available dates (if provided, only these dates are selectable)
 	 * @property {Date | null} [selectedDate] - Currently selected date (bindable)
+	 * @property {Date} [currentMonth] - Current month being viewed
+	 * @property {boolean} [loading] - Loading state for calendar data
 	 * @property {(date: Date) => void} [onDateSelect] - Callback when a date is selected
+	 * @property {(month: Date) => void} [onMonthChange] - Callback when month navigation occurs
 	 */
 
 	/** @type {Props} */
@@ -34,13 +38,15 @@
 		endDate = addMonths(new Date(), 12),
 		highlightedDates = [],
 		disabledDates = [],
-		availableDates = [],
 		selectedDate = $bindable(null),
-		onDateSelect
+		currentMonth = new Date(),
+		loading = false,
+		onDateSelect,
+		onMonthChange
 	} = $props();
 
 	// Current month being viewed
-	let currentDate = $derived(startOfMonth(startDate));
+	let currentDate = $derived(startOfMonth(currentMonth));
 
 	// Get all days to display in the calendar grid
 	const getCalendarDays = $derived.by(() => {
@@ -77,19 +83,27 @@
 		if (isDateInList(normalizedDate, disabledDates)) return true;
 
 		// If availableDates is provided, only those dates are enabled
-		if (availableDates.length > 0 && !isDateInList(normalizedDate, availableDates)) return true;
+		if (highlightedDates.length > 0 && !isDateInList(normalizedDate, highlightedDates)) return true;
 
 		return false;
 	};
 
 	// Navigate to previous month
 	const goToPrevMonth = () => {
-		currentDate = subMonths(currentDate, 1);
+		const newMonth = subMonths(currentDate, 1);
+		currentDate = newMonth;
+		if (onMonthChange) {
+			onMonthChange(newMonth);
+		}
 	};
 
 	// Navigate to next month
 	const goToNextMonth = () => {
-		currentDate = addMonths(currentDate, 1);
+		const newMonth = addMonths(currentDate, 1);
+		currentDate = newMonth;
+		if (onMonthChange) {
+			onMonthChange(newMonth);
+		}
 	};
 
 	// Check if we can go to previous month
@@ -164,7 +178,7 @@
 <!-- Calendar grid -->
 <div class="grid grid-cols-7 gap-1">
 	<!-- Day headers -->
-	{#each ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] as day (day)}
+	{#each DAYS_OF_WEEK as day (day)}
 		<div class="p-2 text-center uppercase text-xs font-medium text-neutral-300">
 			{day}
 		</div>
@@ -176,40 +190,53 @@
 		{@const highlighted = isDateInList(day.date, highlightedDates)}
 		{@const selected = isSelected(day.date)}
 		{@const today = isToday(day.date)}
+		
 
-		<button
-			type="button"
-			onclick={() => selectDate(day)}
-			disabled={disabled || !day.isCurrentMonth}
-			class={[
-				'relative aspect-square rounded-lg p-1 text-sm font-medium transition-all cursor-pointer disabled:cursor-not-allowed',
-				// Base styles
-				day.isCurrentMonth ? 'text-neutral-300' : 'text-neutral-500',
-				// Disabled styles
-				disabled && day.isCurrentMonth ? 'cursor-not-allowed text-neutral-500' : '',
-				// Hover styles (only for non-disabled, current month dates)
-				!disabled && day.isCurrentMonth
-					? 'hover:scale-105 hover:bg-neutral-50 hover:text-neutral-900'
-					: '',
-				// Selected state
-				selected && !disabled ? 'bg-neutral-200 text-neutral-900 ' : '',
-				// Highlighted state (only if not selected)
-				highlighted && !selected && !disabled ? 'bg-neutral-800 text-neutral-200' : ''
-				// Today indicator
-				// today && !selected && day.isCurrentMonth ? 'ring-2 ring-neutral-200 ring-offset-1' : '',
-				// Available state styling
-				// !disabled && day.isCurrentMonth && availableDates.length > 0 ? 'ring-1 ring-green-300' : ''
-			]}
-			aria-label={format(day.date, 'MMMM d, yyyy')}
-			aria-pressed={selected}
-		>
-			{format(day.date, 'd')}
+		{#if loading}
+			<!-- Skeleton loader for dates -->
+			<div class="relative aspect-square rounded-lg p-1 animate-pulse">
+				<div class="h-full w-full rounded-lg bg-neutral-800/50"></div>
+			</div>
+		{:else}
+			<button
+				type="button"
+				onclick={() => selectDate(day)}
+				disabled={disabled || !day.isCurrentMonth}
+				class={[
+					'relative aspect-square rounded-lg p-1 text-sm font-medium transition-all',
+					// Cursor styles - default for disabled in current month, not-allowed for out of month
+					disabled && day.isCurrentMonth ? 'cursor-default' : '',
+					!disabled && day.isCurrentMonth ? 'cursor-pointer' : '',
+					!day.isCurrentMonth ? 'cursor-not-allowed' : '',
+					// Base styles
+					day.isCurrentMonth ? 'text-neutral-300' : 'text-neutral-500',
+					// Disabled styles
+					disabled && day.isCurrentMonth ? 'text-neutral-300' : '',
+				
+					// Selected state
+					selected && !disabled ? 'bg-neutral-200 text-neutral-900' : '',
 
-			<!-- Indicator dot for today -->
-			{#if today && day.isCurrentMonth}
-				<span class="absolute bottom-1 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-primary"
-				></span>
-			{/if}
-		</button>
+
+						// Hover styles (only for non-disabled, current month dates)
+					!disabled && day.isCurrentMonth
+						? 'hover:bg-neutral-50 hover:text-neutral-900'
+						: '',
+					
+					// Highlighted state (only if not selected)
+					highlighted && !selected && !disabled ? 'bg-neutral-800 text-neutral-200' : ''
+					
+				]}
+				aria-label={format(day.date, 'MMMM d, yyyy')}
+				aria-pressed={selected}
+			>
+				{format(day.date, 'd')}
+
+				<!-- Indicator dot for today -->
+				{#if today && day.isCurrentMonth}
+					<span class="absolute bottom-1 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-primary"
+					></span>
+				{/if}
+			</button>
+		{/if}
 	{/each}
 </div>

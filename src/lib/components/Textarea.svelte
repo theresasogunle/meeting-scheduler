@@ -5,15 +5,15 @@
 		label?: string;
 		error?: string;
 		required?: boolean;
-		helperText?: string;
+		value?: string;
 	}
 
 	let {
 		label,
 		error,
 		required = false,
-		helperText,
 		class: className = '',
+		value = $bindable<string>(''),
 		id,
 		...restProps
 	}: Props = $props();
@@ -35,21 +35,18 @@
 	<textarea
 		{...restProps}
 		id={textareaId}
+		bind:value={value}
 		aria-required={required}
 		aria-invalid={hasError}
-		aria-describedby={error ? `${textareaId}-error` : helperText ? `${textareaId}-helper` : undefined}
+		aria-describedby={error ? `${textareaId}-error` : undefined}
 		class="flex min-h-20 w-full rounded-sm border bg-neutral-950/50 px-3 py-2 text-sm shadow-sm transition-all placeholder:text-neutral-500 focus-visible:ring-1 focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 {hasError
-			? 'border-red-500 focus-visible:ring-red-500'
+			? 'border-red-800 focus-visible:ring-red-800'
 			: 'border-neutral-800 focus-visible:ring-neutral-400'} {className}"
 	></textarea>
 
 	{#if error}
-		<p id="{textareaId}-error" class="text-sm text-red-500" role="alert">
+		<p id="{textareaId}-error" class="text-sm text-red-800" role="alert">
 			{error}
-		</p>
-	{:else if helperText}
-		<p id="{textareaId}-helper" class="text-sm text-neutral-400">
-			{helperText}
 		</p>
 	{/if}
 </div>

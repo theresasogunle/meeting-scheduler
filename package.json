@@ -39,6 +39,9 @@
 	},
 	"dependencies": {
 		"@lucide/svelte": "^0.561.0",
-		"date-fns": "^4.1.0"
+		"date-fns": "^4.1.0",
+		"gsap": "^3.14.2",
+		"motion": "^12.23.26",
+		"yup": "^1.7.1"
 	}
 }
