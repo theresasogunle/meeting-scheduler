@@ -78,11 +78,16 @@ To meet the 2hr mark, I have made the following assumption
 
 **Reasoning**: Reduces decision fatigue and clicks. Most users want the soonest available time, so we optimize for this common case while still allowing easy selection of other dates. This accelerates the booking flow for the majority use case.
 
-### 7. Loading Skeletons
+### 6. Loading Skeletons
 
 **Decision**: Calendar days show animated skeleton loaders during API fetches (as we fetch the API per month), not spinners or blank states.
 
 **Reasoning**: Skeleton screens instantly show the calendar's structure, so users know something is happening instead of staring at a blank space or spinner. This keeps the layout steady and avoids jarring shifts when the data loads, making the wait feel shorter and the experience smoother.
+
+### 7. HTML Meta Tags
+**Decision**: Added customer name to the HTML meta tags for each booking step.
+
+**Reasoning**: Including the customer's name in meta tags can improve personalization, make previews more informative when sharing links, and help with analytics or integrations. It's a small detail that enhances the user experience and provides more context in the page metadata.
 
 ## What I'd Improve With More Time
 
