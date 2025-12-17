@@ -30,15 +30,21 @@ A modern, intuitive meeting booking interface built for SDR platforms to help pr
 
 ## Initial Ideas in tldraw.
 
+## Feature Prioritization & Visualization
+
+I visualized and prioritized features based on user value(putting myself in the shoes of the users) and implementation effort. This helped clarify the core booking flow and identify enhancements for future iterations.
+
 ![Finding a time](<shapes at 25-12-17 12.16.39.png>)
 ![Booking a time](<shapes at 25-12-17 12.19.35.png>)
 ![Confirmation](<shapes at 25-12-17 12.20.27.png>)
 
 ## Assumptions
 
-- I have assumed everyone is on Europe/London timezone
-- I have assumed that users prefer the 12hr time format
-- I have assumed that the booking will always be successful, meaning there wouldn't be an error from the API when calling the POST meeting endpoint.
+To meet the 2hr mark, I have made the following assumption
+
+- Everyone is on Europe/London timezone
+- Users prefer the 12hr time format
+- Booking will always be successful(Majorly happy cases), meaning there wouldn't be an error from the API when calling the POST meeting endpoint.
 
 ## Design Decisions & UX Thinking
 
@@ -46,7 +52,7 @@ A modern, intuitive meeting booking interface built for SDR platforms to help pr
 
 **Decision**: Built the calendar component from scratch rather than using a third-party library.
 
-**Reasoning**: Building a custom calendar gives complete control over styling, behavior, and integration with the API. This allows for pixel-perfect design matching the application's aesthetic I had in mind, seamless integration with our availability data structure, and the ability to add custom features like skeleton loading states, smart auto-selection, and precise disabled date logic. Third-party libraries often come with unnecessary features, larger bundle sizes, and styling constraints that would require workarounds.
+**Reasoning**: Building a custom calendar gives me a complete control over styling, behavior, and integration with the API. This approach avoids the time-consuming debugging and workarounds often required with third-party libraries, especially when implementing custom features like skeleton loading states, smart auto-selection, and precise disabled date logic. It ensures a pixel-perfect design that matches the application's aesthetic and integrates seamlessly with our availability data structure, without unnecessary features or bundle size overhead.
 
 ### 2. GSAP Flip Animations for Step Transitions
 
@@ -76,7 +82,23 @@ A modern, intuitive meeting booking interface built for SDR platforms to help pr
 
 **Decision**: Calendar days show animated skeleton loaders during API fetches (as we fetch the API per month), not spinners or blank states.
 
-**Reasoning**: Skeleton screens reduce perceived wait time by showing structure immediately. Users understand content is loading without feeling "stuck." The calendar grid remains stable, preventing layout shift when data arrives.
+**Reasoning**: Skeleton screens instantly show the calendar's structure, so users know something is happening instead of staring at a blank space or spinner. This keeps the layout steady and avoids jarring shifts when the data loads, making the wait feel shorter and the experience smoother.
+
+## What I'd Improve With More Time
+
+1. **Timezone handling** - I have assumed everyone is in the same timezone, so this will be the highest priority to add a dropdown to select timezone.
+2. **Email validation & Name support for guests** - Currently guests accept any string; should validate email format, and also think of a way to add support for guest name without making the UI feel clustered.
+3. **Animations polishing** - Fine-tune hover state/button animations and some transitions in the calendar view.
+4. **Mobile optimization** - While responsive, the calendar could use mobile-specific gestures (swipe to change months)
+5. **Accessibility improvements**:
+   - Keyboard navigation for calendar (arrow keys to navigate dates)
+   - ARIA live regions for loading states
+   - Focus management between steps
+   - Screen reader announcements for state changes
+6. **Calendar integration** - Add to Calendar buttons (Google, Outlook, iCal)
+7. **Dark/light mode toggle** - Currently only dark mode
+8. **Unit tests** - Component and utility function tests
+9. **E2E tests** - Playwright tests for critical user flows
 
 ## Project Structure
 
@@ -152,22 +174,6 @@ npm run lint
 # Format code
 npm run format
 ```
-
-## What I'd Improve With More Time
-
-1. **Timezone handling** - I have assumed everyone is in the same timezone, so this will be the highest priority to add a dropdown to select timezone.
-2. **Email validation & Name support for guests** - Currently guests accept any string; should validate email format, and also think of a way to add support for guest name without making the UI feel clustered.
-3. **Animations polishing** - Fine-tune hover state/button animations and some transitions in the calendar view.
-4. **Mobile optimization** - While responsive, the calendar could use mobile-specific gestures (swipe to change months)
-5. **Accessibility improvements**:
-   - Keyboard navigation for calendar (arrow keys to navigate dates)
-   - ARIA live regions for loading states
-   - Focus management between steps
-   - Screen reader announcements for state changes
-6. **Calendar integration** - Add to Calendar buttons (Google, Outlook, iCal)
-7. **Dark/light mode toggle** - Currently only dark mode
-8. **Unit tests** - Component and utility function tests
-9. **E2E tests** - Playwright tests for critical user flows
 
 ## Browser Support
 
