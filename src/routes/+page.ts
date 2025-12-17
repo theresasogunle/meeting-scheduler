@@ -6,7 +6,7 @@ import { getCurrentMonthString } from '$lib/utils/urlSync';
 const CALENDAR_API_URL = 'https://calendar.meetchase.ai';
 
 // Disable SSR to prevent issues in serverless environment
-export const ssr = false;
+// export const ssr = false;
 
 export const load: PageLoad = async ({ fetch, url }) => {
 	// Get month from URL params, default to current month
